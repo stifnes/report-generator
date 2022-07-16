@@ -1,18 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getAllProjects } from "../features/projects/projectSlice";
+import {
+  getAllProjects,
+  getSelectedProjects,
+} from "../features/projects/projectSlice";
 import ProjectCard from "./ProjectCard";
 
 const ProjectListing = () => {
   const projects = useSelector(getAllProjects);
+  const selectedProject = useSelector(getSelectedProjects);
   let renderProjects = "";
+  let filteredProjects = "";
 
-  renderProjects = projects.map((project, index) => {
-    return <ProjectCard key={index} data={project} />;
+  filteredProjects =
+    selectedProject !== "projects"
+      ? projects.filter((project) => project.projectId === selectedProject)
+      : projects;
+  renderProjects = filteredProjects.map((project) => {
+    return <ProjectCard key={project.name} data={project} />;
   });
-  return <div>
-  {renderProjects}
-  </div>;
+  return <div>{renderProjects}</div>;
 };
 
 export default ProjectListing;
