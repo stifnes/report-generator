@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import SidebarComponent from './components/Sidebar';
 import Header from './components/Header';

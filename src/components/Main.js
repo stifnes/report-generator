@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
-import { fetchAsyncProjects } from '../features/projects/projectSlice'
-import { fetchAsyncGateways } from '../features/gateways/gatewaySlice'
+import { fetchAsyncProjects, getAllProjects } from '../features/projects/projectSlice'
+import { fetchAsyncGateways, getAllGateways } from '../features/gateways/gatewaySlice'
 import ProjectListing from './ProjectListing';
 import GatewayListing from './GatewayListing';
 
@@ -13,6 +13,19 @@ const Main = () => {
       dispatch(fetchAsyncGateways())
       dispatch(fetchAsyncProjects())
   },[dispatch])
+
+  const projects = useSelector(getAllProjects)
+  const gateways = useSelector(getAllGateways)
+  const projectFilterOptions = projects.map((project) => { 
+   return <option value={project.projectId} key={project.projectId}>
+    {project.name}
+  </option>
+   })
+  const gatewayFilterOptions = gateways.map((gateway) => { 
+   return <option value={gateway.gatewayId} key={gateway.gatewayId}>
+    {gateway.name}
+  </option>
+ })
   return (
     <div className="main">
       <div className="filters">
@@ -20,19 +33,13 @@ const Main = () => {
           <option value="projects">
             All Projects
           </option>
-          <option value="project1">
-            Project 1
-          </option>
-          <option value="project2">Project 2</option>
+          {projectFilterOptions}
         </select>
         <select name="gateways">
           <option value="gateways">
             All gateways
           </option>
-          <option value="gateway1">
-            Gateway 1
-          </option>
-          <option value="gateway2">Gateway 2</option>
+          {gatewayFilterOptions}
         </select>
       </div>
       <ProjectListing/>
