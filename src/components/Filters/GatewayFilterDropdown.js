@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch} from 'react-redux'
 
-import { getAllGateways, selectGateway } from '../features/gateways/gatewaySlice'
+import { getAllGateways, selectGateway } from '../../features/gateways/gatewaySlice'
+import styles from './Filters.module.scss'
 
 const GatewayFilterDropdown = (props) => {
 
@@ -19,7 +20,7 @@ const GatewayFilterDropdown = (props) => {
    })
   return (
     <div>
-      <select name="gateway" onChange={updateSelectedGateway}>
+      <select name="gateway" className={styles.filters} onChange={updateSelectedGateway}>
           <option value="gateways">
             All Gateways
           </option>

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch} from 'react-redux'
 
-import { getAllProjects, selectProject, } from '../features/projects/projectSlice'
+import { getAllProjects, selectProject, } from '../../features/projects/projectSlice'
+import styles from './Filters.module.scss'
+
 
 const FilterDropdown = (props) => {
 
@@ -19,7 +21,7 @@ const FilterDropdown = (props) => {
    })
   return (
     <div>
-      <select name="project" onChange={updateSelectedProject}>
+      <select name="project" className={styles.filters} onChange={updateSelectedProject}>
           <option value="projects">
             All Projects
           </option>

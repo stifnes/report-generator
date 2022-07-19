@@ -1,0 +1,29 @@
+@import '../../assets/styles/variables';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+  padding: 20px 35px;
+  border-bottom: 2px solid #F3F6F9;
+  .sidebarExtender {
+    margin-left: 56px;
+  }
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  .initials {
+    margin-right: 8px;
+    background-color: #F6CA65;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  .username {
+    color: #005B96;
+    font-weight: bold
+  }
+}
+

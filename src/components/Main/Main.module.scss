@@ -1,0 +1,23 @@
+@import '../../assets/styles/variables';
+
+.main {
+  height: calc(100% - 130px);
+  margin-left: 100px;
+  padding: 20px;
+  .filtersContainer {
+    display: flex;
+    * {
+      margin-right: 10px
+    }
+  }
+
+}
+
+.generateReportButton {
+    padding: 10px;
+    background: $color-primary;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    white-space: nowrap;
+}
