@@ -11,15 +11,16 @@ export const fetchAsyncGateways = createAsyncThunk('gateways/fetchAsyncGateways'
 
 const initialState = {
   gateways: [],
+  selectedGateway: "gateways"
 };
 
 const gatewaySlice = createSlice({
   name: "gateways",
   initialState,
   reducers: {
-    addGateways: (state, { payload }) => {
-      state.gateways = payload;
-    },
+    selectGateway: (state, { payload }) => {
+      state.selectedGateway = payload;
+    }
   },
    extraReducers: {
     [fetchAsyncGateways.pending]: () => {
@@ -32,8 +33,9 @@ const gatewaySlice = createSlice({
   }
 });
 
-export const { addGateways } = gatewaySlice.actions;
+export const { selectGateway } = gatewaySlice.actions;
 export const getAllGateways = (state) => state.gateways.gateways
+export const getSelectedGateway = (state) => state.gateways.selectedGateway
 
 export default gatewaySlice.reducer;
 

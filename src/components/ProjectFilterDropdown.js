@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch} from 'react-redux'
 
-import { getAllProjects, selectProject } from '../features/projects/projectSlice'
+import { getAllProjects, selectProject, } from '../features/projects/projectSlice'
 
 const FilterDropdown = (props) => {
 

@@ -4,7 +4,8 @@ const ProjectCard = (props) => {
   const {data} = props;
   return (
     <div className="card">
-      <h2> {data.name} </h2>
+
+      <h2> Project {data.index} </h2>
     </div>
   );
 };
