@@ -1,33 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  getAllProjects,
-  getSelectedProjects,
-} from "../../features/projects/projectSlice";
-import { getSelectedGateway } from "../../features/gateways/gatewaySlice";
+import { getSelectedProjectName } from "../../features/projects/projectSlice";
+import { getAllGateways, getSelectedGatewayName } from "../../features/gateways/gatewaySlice";
 import { getReport } from "../../features/reports/reportSlice";
 
-import ProjectCard from "./ProjectCard";
-import NoReports from '../Reports/NoReports'
-import styles from './ProjectListing.module.scss'
+import ProjectCard from "./ProjectDataTable";
+import NoReports from "../Reports/NoReports";
+import styles from "./ProjectListing.module.scss";
+import Chart from '../Chart'
 
 const ProjectListing = () => {
-  const projects = useSelector(getAllProjects);
-  // const selectedProject = useSelector(getSelectedProjects);
-  // const selectedGateway = useSelector(getSelectedGateway);
+  const allGateways = useSelector(getAllGateways);
+  const selectedProjectName = useSelector(getSelectedProjectName);
+  const selectedGatewayName = useSelector(getSelectedGatewayName);
   const reportData = useSelector(getReport);
   let renderProjects = [];
-  let filteredProjects = "";
-  // let gatewayFilteredProjects = "";
+  let totalAmount = 0
 
-  // filteredProjects = selectedReport.filter((project) => project.projectId === selectedProject)
-  // gatewayFilteredProjects = selectedGateway !== "gateways"
-  //     ? filteredProjects.filter((project) => project.gatewayIds.includes(selectedGateway))
-  //     : filteredProjects;
-
-  // renderProjects = reportData.map((project) => {
-  //   return <ProjectCard key={project.paymentId} data={project} />;
-  // });
   const reportsMap = new Map();
   for (let i = 0; i < reportData.length; i++) {
     if (reportsMap.has(reportData[i].projectId)) {
@@ -38,14 +27,46 @@ const ProjectListing = () => {
       reportsMap.set(reportData[i].projectId, [reportData[i]]);
     }
   }
+  reportData.map(report => {
+    return totalAmount += report.amount
+  })
+
+  const gatewayMap  = new Map();
+
+  for(let i = 0; i < allGateways.length; i++) {
+     let {name, gatewayId} = allGateways[i];
+     gatewayMap.set(gatewayId, name);
+  }
+  console.log('gatwayMap',gatewayMap)
 
   reportsMap.forEach((value, key) => {
-    renderProjects.push(<ProjectCard projectId={key} data={value} />);
+    value.gatewayName = gatewayMap.get(value.gatewayId)
+    console.log('gatwayName',value.gatewayId)
+    renderProjects.push(<ProjectCard projectId={key} data={value} gatewayMap={gatewayMap}/>);
   });
+
   const showProjects = renderProjects.length > 0;
 
-  return showProjects ? <div className={styles.listing}>{renderProjects}</div> : <div><NoReports/></div>;
+  return showProjects ? (
+    <div style={{display: 'grid', gridTemplateColumns: '1.5fr 1fr'}}>
+      <div>
+        <div className={styles.listing}>
+          <h3>
+            {selectedProjectName} | {selectedGatewayName}
+          </h3>
+          {renderProjects}
+        </div>
+        <div className={styles.listing}>
+          <h2>Total: {totalAmount.toFixed(2)} USD</h2>
+        </div>
+      </div>
+      <Chart/>
+    </div>
+  ) : (
+    <div>
+      <NoReports />
+    </div>
+  );
 };
 
 export default ProjectListing;
- 

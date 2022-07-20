@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getAllGateways } from "../features/gateways/gatewaySlice";
-import ProjectCard from "./Projects/ProjectCard";
+import { getAllGateways } from "../../features/gateways/gatewaySlice";
+import ProjectCard from "../Projects/ProjectDataTable";
 
 const GatewayListing = () => {
   const gateways = useSelector(getAllGateways);

@@ -1,12 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import mvpApi from "../../common/mvpApi";
-
-export const postAsyncReport = createAsyncThunk(
-  "reports/postAsyncReport",
-  // async ({ initialState }) => {
-  //   await mvpApi.post("/report");
-  // }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   projectReport: []
@@ -21,8 +13,6 @@ const reportSlice = createSlice({
     }
   },
 });
-
-console.log(initialState)
 
 export const { postReportData } = reportSlice.actions;
 export const getReport = (state) => state.reports.projectReport;

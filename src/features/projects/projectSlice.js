@@ -12,7 +12,8 @@ export const fetchAsyncProjects = createAsyncThunk('projects/fetchAsyncProjects'
 
 const initialState = {
   projects: [],
-  selectedProject: "projects"
+  selectedProject: "",
+  selectedProjectName: "All Projects"
 };
 
 const projectSlice = createSlice({
@@ -21,6 +22,9 @@ const projectSlice = createSlice({
   reducers: {
     selectProject: (state, { payload }) => {
       state.selectedProject = payload;
+    },
+    selectProjectName: (state, { payload }) => {
+      state.selectedProjectName = payload;
     }
   },
   extraReducers: {
@@ -34,8 +38,9 @@ const projectSlice = createSlice({
   }
 });
 
-export const { selectProject } = projectSlice.actions;
+export const { selectProject, selectProjectName } = projectSlice.actions;
 export const getAllProjects = (state) => state.projects.projects;
 export const getSelectedProjects = (state) => state.projects.selectedProject
+export const getSelectedProjectName = (state) => state.projects.selectedProjectName
 
 export default projectSlice.reducer;
