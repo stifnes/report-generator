@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useSelector, useDispatch} from 'react-redux'
 
-import { getAllGateways, selectGateway, selectGatewayName, selectedGatewayMap } from '../../features/gateways/gatewaySlice'
+import { getAllGateways, selectGateway, selectGatewayName } from '../../features/gateways/gatewaySlice'
 import styles from './Filters.module.scss'
 
 const GatewayFilterDropdown = (props) => {
