@@ -4,10 +4,10 @@ import { getSelectedProjectName } from "../../features/projects/projectSlice";
 import { getAllGateways, getSelectedGatewayName } from "../../features/gateways/gatewaySlice";
 import { getReport } from "../../features/reports/reportSlice";
 
-import ProjectCard from "./ProjectDataTable";
+import ProjectDataTable from "./ProjectDataTable";
 import NoReports from "../Reports/NoReports";
 import styles from "./ProjectListing.module.scss";
-import Chart from '../Chart'
+import GatewayChart from '../GatewayChart'
 
 const ProjectListing = () => {
   const allGateways = useSelector(getAllGateways);
@@ -37,12 +37,10 @@ const ProjectListing = () => {
      let {name, gatewayId} = allGateways[i];
      gatewayMap.set(gatewayId, name);
   }
-  console.log('gatwayMap',gatewayMap)
 
   reportsMap.forEach((value, key) => {
     value.gatewayName = gatewayMap.get(value.gatewayId)
-    console.log('gatwayName',value.gatewayId)
-    renderProjects.push(<ProjectCard projectId={key} data={value} gatewayMap={gatewayMap}/>);
+    renderProjects.push(<ProjectDataTable projectId={key} data={value} gatewayMap={gatewayMap} key={key}/>);
   });
 
   const showProjects = renderProjects.length > 0;
@@ -60,7 +58,7 @@ const ProjectListing = () => {
           <h2>Total: {totalAmount.toFixed(2)} USD</h2>
         </div>
       </div>
-      <Chart/>
+      <GatewayChart/>
     </div>
   ) : (
     <div>

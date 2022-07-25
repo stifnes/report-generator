@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  projectReport: []
+  projectReport: [],
 };
 
 const reportSlice = createSlice({
@@ -14,6 +14,6 @@ const reportSlice = createSlice({
   },
 });
 
-export const { postReportData } = reportSlice.actions;
+export const { postReportData, setProjectNames } = reportSlice.actions;
 export const getReport = (state) => state.reports.projectReport;
 export default reportSlice.reducer;

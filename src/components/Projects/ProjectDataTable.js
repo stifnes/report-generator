@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getAllProjects } from "../../features/projects/projectSlice";
 import styles from "./ProjectDataTable.module.scss";
 
-const ProjectCard = (props) => {
+const ProjectDataTable = (props) => {
   const projects = useSelector(getAllProjects);
   const { projectId, data, gatewayMap } = props;
   let projectName = "";
@@ -27,6 +27,7 @@ const ProjectCard = (props) => {
       </div>
     );
   });
+
   return (
     <details className={styles.card}>
       <summary className={styles.projectHeader}>
@@ -44,4 +45,4 @@ const ProjectCard = (props) => {
   );
 };
 
-export default ProjectCard;
+export default ProjectDataTable;

@@ -4,7 +4,10 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
+const GatewayChart = (props) => {
+  const {chartData} = props
+
+const data = {
   labels: ['Project 1', 'Project 2', 'Project 3', 'Project 4' ],
   datasets: [
     {
@@ -24,7 +27,7 @@ export const data = {
   ],
 };
 
-const Chart = () => {
+
   return (
       <div style={{ height: '500px', width: '500px', margin: '0 auto' }}>
         <Doughnut data={data}   options={{
@@ -35,4 +38,4 @@ const Chart = () => {
   );
 };
 
-export default Chart;
+export default GatewayChart;
