@@ -8,7 +8,7 @@ const ProjectDataTable = (props) => {
   const { projectId, data, gatewayMap } = props;
   let projectName = "";
   let projectDetails = "";
-
+  
   projects.forEach(function (project) {
     if (projectId === project.projectId) {
       projectName = project.name;

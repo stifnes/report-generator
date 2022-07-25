@@ -1,13 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { getSelectedProjectName } from "../../features/projects/projectSlice";
-import { getAllGateways, getSelectedGatewayName } from "../../features/gateways/gatewaySlice";
+import {
+  getAllGateways,
+  getSelectedGatewayName,
+} from "../../features/gateways/gatewaySlice";
 import { getReport } from "../../features/reports/reportSlice";
 
 import ProjectDataTable from "./ProjectDataTable";
 import NoReports from "../Reports/NoReports";
 import styles from "./ProjectListing.module.scss";
-import GatewayChart from '../GatewayChart'
+import GatewayChart from "../GatewayChart";
 
 const ProjectListing = () => {
   const allGateways = useSelector(getAllGateways);
@@ -15,7 +18,8 @@ const ProjectListing = () => {
   const selectedGatewayName = useSelector(getSelectedGatewayName);
   const reportData = useSelector(getReport);
   let renderProjects = [];
-  let totalAmount = 0
+  let totalAmount = 0;
+  let projectIds = [];
 
   const reportsMap = new Map();
   for (let i = 0; i < reportData.length; i++) {
@@ -27,26 +31,34 @@ const ProjectListing = () => {
       reportsMap.set(reportData[i].projectId, [reportData[i]]);
     }
   }
-  reportData.map(report => {
-    return totalAmount += report.amount
-  })
+  reportData.map((report) => {
+    return (totalAmount += report.amount);
+  });
 
-  const gatewayMap  = new Map();
+  const gatewayMap = new Map();
 
-  for(let i = 0; i < allGateways.length; i++) {
-     let {name, gatewayId} = allGateways[i];
-     gatewayMap.set(gatewayId, name);
+  for (let i = 0; i < allGateways.length; i++) {
+    let { name, gatewayId } = allGateways[i];
+    gatewayMap.set(gatewayId, name);
   }
 
   reportsMap.forEach((value, key) => {
-    value.gatewayName = gatewayMap.get(value.gatewayId)
-    renderProjects.push(<ProjectDataTable projectId={key} data={value} gatewayMap={gatewayMap} key={key}/>);
+    projectIds.push(key)
+    value.gatewayName = gatewayMap.get(value.gatewayId);
+    renderProjects.push(
+      <ProjectDataTable
+        projectId={key}
+        data={value}
+        gatewayMap={gatewayMap}
+        key={key}
+      />
+    );
   });
 
   const showProjects = renderProjects.length > 0;
 
   return showProjects ? (
-    <div style={{display: 'grid', gridTemplateColumns: '1.5fr 1fr'}}>
+    <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr" }}>
       <div>
         <div className={styles.listing}>
           <h3>
@@ -58,7 +70,7 @@ const ProjectListing = () => {
           <h2>Total: {totalAmount.toFixed(2)} USD</h2>
         </div>
       </div>
-      <GatewayChart/>
+      <GatewayChart filteredProjects={projectIds} chartData={reportData} totalAmount={totalAmount} />
     </div>
   ) : (
     <div>
