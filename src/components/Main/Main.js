@@ -11,7 +11,6 @@ import {
   getSelectedGateway,
 } from "../../features/gateways/gatewaySlice";
 
-import {fetchAsyncUsers } from "../../features/users/userSlice"
 
 import { postReportData } from "../../features/reports/reportSlice";
 import ProjectListing from "../Projects/ProjectListing";
