@@ -1,15 +1,15 @@
-@import '../../assets/styles/variables';
+@import "../../assets/styles/variables";
 
 .footer {
   background-color: #fff;
   padding-inline: 30px;
   margin-left: 100px;
   height: 65px;
-    display: flex;
-    align-items: center;
-  a {
-    color:$text-primary;
+  display: flex;
+  align-items: center;
+  .footerLink {
+    color: $text-primary;
     font-weight: bold;
-    text-decoration: none
+    text-decoration: none;
   }
 }

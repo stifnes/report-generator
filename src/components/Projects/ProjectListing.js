@@ -8,18 +8,18 @@ import {
 import { getReport } from "../../features/reports/reportSlice";
 
 import ProjectDataTable from "./ProjectDataTable";
-import NoReports from "../Reports/NoReports";
+import NoReports from "../Common/NoReports";
 import styles from "./ProjectListing.module.scss";
-import GatewayChart from "../GatewayChart";
+import GatewayChart from "../Charts/GatewayChart";
 
 const ProjectListing = () => {
   const allGateways = useSelector(getAllGateways);
   const selectedProjectName = useSelector(getSelectedProjectName);
   const selectedGatewayName = useSelector(getSelectedGatewayName);
   const reportData = useSelector(getReport);
-  let renderProjects = [];
+  const renderProjects = [];
   let totalAmount = 0;
-  let projectIds = [];
+  const projectIds = [];
 
   const reportsMap = new Map();
   for (let i = 0; i < reportData.length; i++) {
@@ -43,7 +43,7 @@ const ProjectListing = () => {
   }
 
   reportsMap.forEach((value, key) => {
-    projectIds.push(key)
+    projectIds.push(key);
     value.gatewayName = gatewayMap.get(value.gatewayId);
     renderProjects.push(
       <ProjectDataTable
@@ -56,9 +56,9 @@ const ProjectListing = () => {
   });
 
   const showProjects = renderProjects.length > 0;
-
+  const showGatewayChart = !(selectedProjectName !== "All Projects" && selectedGatewayName !== "All Gateways");
   return showProjects ? (
-    <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr" }}>
+    <div className={styles.listingContainer}>
       <div>
         <div className={styles.listing}>
           <h3>
@@ -70,7 +70,13 @@ const ProjectListing = () => {
           <h2>Total: {totalAmount.toFixed(2)} USD</h2>
         </div>
       </div>
-      <GatewayChart filteredProjects={projectIds} chartData={reportData} totalAmount={totalAmount} />
+      {showGatewayChart && (
+        <GatewayChart
+          filteredProjects={projectIds}
+          chartData={reportData}
+          totalAmount={totalAmount}
+        />
+      )}
     </div>
   ) : (
     <div>

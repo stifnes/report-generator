@@ -28,11 +28,8 @@ const projectSlice = createSlice({
     }
   },
   extraReducers: {
-    [fetchAsyncProjects.pending]: () => {
-      console.log('pending')
-    },
+    [fetchAsyncProjects.pending]: () => {},
     [fetchAsyncProjects.fulfilled]: (state, {payload}) => {
-      console.log('fetched successfully')
       return {...state, projects: payload }
     },
   }

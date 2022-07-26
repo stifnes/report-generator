@@ -32,11 +32,8 @@ const gatewaySlice = createSlice({
     }
   },
    extraReducers: {
-    [fetchAsyncGateways.pending]: () => {
-      console.log('pending')
-    },
+    [fetchAsyncGateways.pending]: () => {},
     [fetchAsyncGateways.fulfilled]: (state, {payload}) => {
-      console.log('fetched successfully')
       return {...state, gateways: payload }
     },
   }

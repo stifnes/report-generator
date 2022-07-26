@@ -9,11 +9,11 @@ import icon4 from '../../assets/images/icon4.svg'
 const SidebarComponent = () => {
   return (
     <div className={styles.sidebar}>
-      <img src={icon1} alt="reports-logo"/>
-      <img src={icon2} alt="reports-logo"/>
-      <img src={icon3} alt="reports-logo"/>
-      <img src={ReportsLogo} alt="reports-logo"/>
-      <img src={icon4} alt="reports-logo"/>
+      <img className={styles.sidebarLogo} src={icon1} alt="reports-logo"/>
+      <img className={styles.sidebarLogo} src={icon2} alt="reports-logo"/>
+      <img className={styles.sidebarLogo} src={icon3} alt="reports-logo"/>
+      <img className={styles.sidebarLogo} src={ReportsLogo} alt="reports-logo"/>
+      <img className={styles.sidebarLogo} src={icon4} alt="reports-logo"/>
     </div>
   )
 }
