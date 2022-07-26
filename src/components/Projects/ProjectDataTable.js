@@ -19,7 +19,7 @@ const ProjectDataTable = (props) => {
   projectDetails = data.map((value) => {
     amount += value.amount
     return (
-      <div className={styles.projectDetail}>
+      <div className={styles.projectDetail} key={value.amount}>
         <h3>{value.created}</h3>
         <h3>{gatewayMap.get(value.gatewayId)}</h3>
         <h3>{value.paymentId}</h3>
