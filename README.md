@@ -1,4 +1,4 @@
-# Report Generator [Click here to see the demo](https://jovial-elion-2c016e.netlify.app/) 
+# Report Generator
 ```
 --- This project contains a representation of the Report Generator.
 --- User can generate a report based on the filters of projects and gateays.
