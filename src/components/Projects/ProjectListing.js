@@ -67,7 +67,7 @@ const ProjectListing = () => {
           {renderProjects}
         </div>
         <div className={styles.listing}>
-          <h2>Total: {totalAmount.toFixed(2)} USD</h2>
+          <h2 className="amount">Total: {totalAmount.toFixed(2)} USD</h2>
         </div>
       </div>
       {showGatewayChart && (

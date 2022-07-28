@@ -8,7 +8,7 @@ const ProjectDataTable = (props) => {
   const { projectId, data, gatewayMap } = props;
   let projectName = "";
   let projectDetails = "";
-
+  let amount = 0;
   let sortedProjects = [];
 
   projects.forEach(function (project) {
@@ -17,16 +17,14 @@ const ProjectDataTable = (props) => {
     }
   });
 
-  sortedProjects = data.sort((objA, objB) => {
-    return Date.parse(objA.created) - Date.parse(objB.created);
+  sortedProjects = data.sort((projectA, projectB) => {
+    return Date.parse(projectA.created) - Date.parse(projectB.created);
   });
-  let amount = 0;
+
   projectDetails = sortedProjects.map((value) => {
     amount += value.amount;
     let date = new Date(value.created);
     return (
-      // <tbody className={styles.projectDetail}>
-      // </tbody>
       <tr key={value.amount}>
         <td>{date.toLocaleDateString("en-GB").replace(/\//g, ".")}</td>
         <td>{gatewayMap.get(value.gatewayId)}</td>
@@ -40,7 +38,7 @@ const ProjectDataTable = (props) => {
     <details className={styles.card}>
       <summary className={styles.projectHeader}>
         <h2>{projectName}</h2>
-        <h2>Total: {amount.toFixed(2)} USD</h2>
+        <h2 className="amount">Total: {amount.toFixed(2)} USD</h2>
       </summary>
       <table className={styles.projectDetailTable}>
         <thead>
@@ -53,12 +51,6 @@ const ProjectDataTable = (props) => {
         </thead>
         <tbody>{projectDetails}</tbody>
       </table>
-      {/* <div className={styles.projectDetail}>
-        <h3></h3>
-        <h3></h3>
-        <h3></h3>
-        <h3></h3>
-      </div> */}
     </details>
   );
 };

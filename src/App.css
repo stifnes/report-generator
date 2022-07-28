@@ -4,6 +4,9 @@
 h1 {
   margin: 0;
 }
+h2,h3 {
+  font-size: 16px;
+}
 
 .App {
   width: 100vw;
@@ -22,6 +25,10 @@ h1 {
 .sidebar,
 .footer {
   border: 1px solid black;
+}
+
+.amount {
+  text-transform: uppercase;
 }
 
 .react-datepicker__input-container {

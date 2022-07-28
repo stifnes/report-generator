@@ -61,7 +61,7 @@ const GatewayChart = (props) => {
         />
       </div>
       <div className={styles.totalAmountContainer}>
-        <h2>Total Amount: {projectAmounts.toFixed(2)}</h2>
+        <h2 className="amount">Gateway Total: {projectAmounts.toFixed(2)}</h2>
       </div>
     </div>
   );
