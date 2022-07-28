@@ -7,6 +7,10 @@
   height: 65px;
   padding: 20px 35px;
   border-bottom: 2px solid #F3F6F9;
+  .logoContainer {
+    display: flex;
+    align-items: center;
+  }
   .sidebarExtender {
     margin-left: 56px;
   }

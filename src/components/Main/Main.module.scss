@@ -4,6 +4,11 @@
   height: calc(100% - 130px);
   margin-left: 100px;
   padding: 20px;
+  .mainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .filtersContainer {
     display: flex;
     > * {

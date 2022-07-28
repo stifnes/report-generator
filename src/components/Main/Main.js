@@ -50,11 +50,7 @@ const Main = () => {
   return (
     <div className={styles.main}>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+        className={styles.mainHeader}
       >
         <div>
           <h1>Reports</h1>

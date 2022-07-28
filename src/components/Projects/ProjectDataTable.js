@@ -8,23 +8,31 @@ const ProjectDataTable = (props) => {
   const { projectId, data, gatewayMap } = props;
   let projectName = "";
   let projectDetails = "";
-  
+
+  let sortedProjects = [];
+
   projects.forEach(function (project) {
     if (projectId === project.projectId) {
       projectName = project.name;
     }
   });
 
+  sortedProjects = data.sort((objA, objB) => {
+    return Date.parse(objA.created) - Date.parse(objB.created);
+  });
   let amount = 0;
-  projectDetails = data.map((value) => {
-    amount += value.amount
+  projectDetails = sortedProjects.map((value) => {
+    amount += value.amount;
+    let date = new Date(value.created);
     return (
-      <div className={styles.projectDetail} key={value.amount}>
-        <h3>{value.created}</h3>
-        <h3>{gatewayMap.get(value.gatewayId)}</h3>
-        <h3>{value.paymentId}</h3>
-        <h3>{value.amount}</h3>
-      </div>
+      // <tbody className={styles.projectDetail}>
+      // </tbody>
+      <tr key={value.amount}>
+        <td>{date.toLocaleDateString("en-GB").replace(/\//g, ".")}</td>
+        <td>{gatewayMap.get(value.gatewayId)}</td>
+        <td>{value.paymentId}</td>
+        <td>{value.amount}</td>
+      </tr>
     );
   });
 
@@ -34,13 +42,23 @@ const ProjectDataTable = (props) => {
         <h2>{projectName}</h2>
         <h2>Total: {amount.toFixed(2)} USD</h2>
       </summary>
-      <div className={styles.projectDetail}>
-        <h3>Date</h3>
-        <h3>Gateways</h3>
-        <h3>Transaction ID</h3>
-        <h3>Amount</h3>
-      </div>
-      {projectDetails}
+      <table className={styles.projectDetailTable}>
+        <thead>
+          <tr>
+            <td>Date</td>
+            <td>Gateways</td>
+            <td>Transaction ID</td>
+            <td>Amount</td>
+          </tr>
+        </thead>
+        <tbody>{projectDetails}</tbody>
+      </table>
+      {/* <div className={styles.projectDetail}>
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+      </div> */}
     </details>
   );
 };

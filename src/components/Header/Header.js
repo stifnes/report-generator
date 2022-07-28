@@ -11,7 +11,7 @@ const Header = (props) => {
 
   return (
     <div className={styles.header}>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div className={styles.logoContainer}>
         <img src={Logo} alt="logo" />
         <div className={styles.sidebarExtender}>
           <img src={SidebarExtenderLogo} alt="logo" />
